@@ -12,7 +12,7 @@ Images
 ------
 `localcache.loadImages({options});`
 
-All the images must have the `cache` attribute and have their source located at data-src instead of src. Note that this is (Javascript-disabled)-unfriendly!
+All the images must have the `cache` class and have their source located at data-src instead of src. Note that this is (Javascript-disabled)-unfriendly!
 
 JavaScript
 ----------
