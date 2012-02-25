@@ -67,7 +67,7 @@ localcache.load = function (images, params) {
       image.src = url;
       image.originalsrc = url;
       image.onload = localcache._image_loaded.bind(image);
-      image.onerror = function () { console.error("No s'ha pogut carregar la imatge"); };
+      image.onerror = function () { console.error("Image could not be loaded"); };
     }
   } else {
     var t = document.getElementsByClassName("cache");
