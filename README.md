@@ -4,4 +4,6 @@ It uses the HTML5 localStorage to cache images as requested. In case it's not su
 
 Library
 =======
-The use is straightforward; everything is namespaced under `localcache`. It is called that way. `localcache.load([list_of_image_files_in_an_array], {options});`. That should be called when the page loads, either with `window.onload` or placing it just before `body` closes. Options is a map; possible values are: `load`, by default false (if it's true, it will force loading of images without getting the cached version) and `minDate`, a `Date` object setting the minimum date a cached copy must have to be used. Else, it's just loaded.
+The use is straightforward; everything is namespaced under `localcache`. It is called that way. `localcache.load({options});`. That should be called when the page loads, either with `window.onload` or placing it just before `body` closes. Options is a map; possible values are: `load`, by default false (if it's true, it will force loading of images without getting the cached version) and `minDate`, a `Date` object setting the minimum date a cached copy must have to be used. Else, it's just loaded.
+
+All the images must have the `cache` attribute and have their source located at data-src instead of src. Note that this is (Javascript-disabled)-unfriendly!
