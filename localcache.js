@@ -92,3 +92,38 @@ localcache.loadJS = function (scripts,params) {
     xmlhttp.send(null);
   }
 };
+
+localcache._loadCSS = function (data) {
+  var sheet = document.createElement('style');
+  sheet.innerHTML = data;
+  document.body.appendChild(sheet);
+};
+
+localcache.loadCSS = function (scripts,params) {
+  var params = params || {};
+  params.load = params.load || false;
+  params.minDate = params.minDate || false;
+  var xmlhttp = new XMLHttpRequest();
+  for (var i=0; i<scripts.length; i++) {
+    var script = scripts[i];
+    if (localcache.hasLocal && !params.load) {
+      var cached = JSON.parse(localStorage.getItem("cached-css-"+script));
+      if (cached != null) {
+        if (!params.minDate || (new Date(cached.date) > params.minDate)) {
+          localcache._loadCSS(cached.data);
+          continue;
+        }
+      }
+    }
+    xmlhttp.overrideMimeType('text/plain');
+    xmlhttp.open("GET", script, true);
+    xmlhttp.onreadystatechange = function() {
+    if (xmlhttp.readyState == 4) {
+      var contents = xmlhttp.responseText;
+      localcache._loadCSS(contents);
+      localStorage.setItem("cached-css-"+script,JSON.stringify({data:contents,date:new Date().toString()}));
+      }
+    }
+    xmlhttp.send(null);
+  }
+};
